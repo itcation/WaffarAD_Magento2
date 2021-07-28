@@ -1,0 +1,22 @@
+{
+    "name": "waffarad/magento2",
+    "description": "WAFFARAD is an affiliate network that provides technical and promotional tools to carry out advertising campaigns.",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "itCation",
+            "email": "dev@itcation.com"
+        }
+    ],
+    "require": {
+        "magento/framework": "^100.1.0|^101.0.0|^102.0.0|^103.0.0"
+    },
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "WaffarAD\\Magento2\\": ""
+        }
+    }
+}
