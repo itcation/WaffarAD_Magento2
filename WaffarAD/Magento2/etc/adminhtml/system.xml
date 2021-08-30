@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="waffarad" translate="label" sortOrder="999">
+            <label>WaffarAD</label>
+        </tab>
+        <section id="waffarad" sortOrder="10" showInWebsite="0" showInStore="0" showInDefault="1" translate="label">
+            <label>WaffarAD</label>
+            <tab>waffarad</tab>
+            <resource>WaffarAD_Magento2::config_waffarad_magento2</resource>
+            <group id="general" sortOrder="10" showInWebsite="0" showInStore="0" showInDefault="1" translate="label">
+                <label>General</label>
+                <field id="enabled" type="select" sortOrder="10" showInWebsite="0" showInStore="0" showInDefault="1" translate="label">
+                    <label>Enabled</label>
+                    <comment/>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

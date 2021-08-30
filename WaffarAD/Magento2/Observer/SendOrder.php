@@ -18,6 +18,7 @@ use Magento\Framework\UrlInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class SendOrder implements ObserverInterface
 {
@@ -56,6 +57,13 @@ class SendOrder implements ObserverInterface
     private $cookieMetadataFactory;
 
     /**
+     * @var ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    const XML_MODULE_ENABLED = 'waffarad/general/enabled';
+
+    /**
      * SendOrder constructor.
      * @param RemoteAddress $remoteAddress
      * @param StoreManagerInterface $storeManager
@@ -74,7 +82,8 @@ class SendOrder implements ObserverInterface
         UrlInterface $url,
         LoggerInterface $logger,
         SessionManagerInterface $sessionManager,
-        CookieMetadataFactory $cookieMetadataFactory
+        CookieMetadataFactory $cookieMetadataFactory,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->remoteAddress = $remoteAddress;
         $this->storeManager = $storeManager;
@@ -84,13 +93,16 @@ class SendOrder implements ObserverInterface
         $this->logger = $logger;
         $this->sessionManager = $sessionManager;
         $this->cookieMetadataFactory = $cookieMetadataFactory;
+        $this->scopeConfig = $scopeConfig;
     }
-
     /**
      * @param Observer $observer
      */
     public function execute(Observer $observer)
     {
+        if(!$this->scopeConfig->getValue(self::XML_MODULE_ENABLED)) {
+            return $this;
+        }
         /**
          * @var $order OrderInterface
          */
